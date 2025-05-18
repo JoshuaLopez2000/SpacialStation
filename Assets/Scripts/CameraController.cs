@@ -1,59 +1,57 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(CapsuleCollider))] // Ensure a CapsuleCollider is attached
+[RequireComponent(typeof(CapsuleCollider))]
 public class CameraController : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of movement
-    public float mouseSensitivity = 100f; // Sensitivity for mouse look
-    public float maxLookAngle = 80f; // Maximum angle the camera can look up or down
+    public float thrustForce = 10f;
+    public float mouseSensitivity = 2f;
+    public float maxLookAngle = 90f;
 
     private Rigidbody rb;
-    private CapsuleCollider collider;
     private float xRotation = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<CapsuleCollider>();
 
-        // Configure Rigidbody
-        rb.freezeRotation = true; // Prevent Rigidbody from rotating due to physics
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // Better collision detection
+        // Configuración del Rigidbody para el espacio
+        rb.useGravity = false;
+        rb.linearDamping = 0f;
+        rb.angularDamping = 0f;
+        rb.freezeRotation = true;
 
-        // Lock and hide the cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
-        // Handle mouse look
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        // Rotación con el mouse
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
 
-        transform.localRotation = Quaternion.Euler(xRotation, transform.localEulerAngles.y + mouseX, 0f);
+        Quaternion localPitch = Quaternion.Euler(xRotation, 0f, 0f); // rotación vertical
+        Quaternion yaw = Quaternion.Euler(0f, transform.eulerAngles.y + mouseX, 0f); // rotación horizontal acumulativa
+
+        transform.rotation = yaw * localPitch;
     }
 
     void FixedUpdate()
     {
-        // Handle movement
-        float moveX = Input.GetAxis("Horizontal"); // A/D keys
-        float moveZ = Input.GetAxis("Vertical");   // W/S keys
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Jump") - (Input.GetKey(KeyCode.LeftControl) ? 1f : 0f);
+        float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        move = move.normalized * moveSpeed * Time.fixedDeltaTime;
-
-        // Move the Rigidbody while respecting collisions
-        rb.MovePosition(rb.position + move);
+        Vector3 thrust = new Vector3(moveX, moveY, moveZ) * thrustForce;
+        rb.AddRelativeForce(thrust, ForceMode.Acceleration);
     }
 
     void OnDestroy()
     {
-        // Unlock and show the cursor when the script is destroyed
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
