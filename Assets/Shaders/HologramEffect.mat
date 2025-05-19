@@ -35,7 +35,7 @@ Material:
     m_Floats:
     - _Frequency: 30
     - _Intensity: 0.77
-    - _Speed: 0.14
+    - _Speed: 0.05
     m_Colors:
     - _Color: {r: 0.15801886, g: 0.45538145, b: 0.6320754, a: 0.74509805}
   m_BuildTextureStacks: []
