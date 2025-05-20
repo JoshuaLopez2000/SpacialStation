@@ -13,7 +13,7 @@ public class ClickHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!visorHasBeenActivated)
             {

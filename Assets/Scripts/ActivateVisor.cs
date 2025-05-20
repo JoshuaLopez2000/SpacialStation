@@ -16,7 +16,7 @@ public class ActivateVisor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (hintText != null)
                 hintText.gameObject.SetActive(false);
