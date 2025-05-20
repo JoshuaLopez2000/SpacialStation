@@ -6,9 +6,12 @@ public class TouchableButton3D : MonoBehaviour
     public Material selectedMaterial;
     public Renderer targetRenderer;
     public TextMeshProUGUI counterText;
-
+    public GameObject VictoryPanel;
+    public FreeCameraController cameraController;
     private static int totalSelected = 0;
     private static TextMeshProUGUI sharedCounterText;
+    private static GameObject sharedPanelToActivate;
+    private static FreeCameraController sharedCameraController;
     private bool isSelected = false;
 
     void Start()
@@ -21,6 +24,12 @@ public class TouchableButton3D : MonoBehaviour
             sharedCounterText = counterText;
             UpdateCounter();
         }
+
+        if (sharedPanelToActivate == null && VictoryPanel != null)
+            sharedPanelToActivate = VictoryPanel;
+
+        if (sharedCameraController == null && cameraController != null)
+            sharedCameraController = cameraController;
     }
 
     void OnMouseDown()
@@ -48,5 +57,14 @@ public class TouchableButton3D : MonoBehaviour
     {
         if (sharedCounterText != null)
             sharedCounterText.text = $"{totalSelected} de 5";
+
+        bool victory = totalSelected >= 5;
+
+        if (sharedCameraController != null)
+            sharedCameraController.DisableCamera();
+
+        if (sharedPanelToActivate != null)
+            sharedPanelToActivate.SetActive(victory);
+
     }
 }

@@ -47,6 +47,13 @@ public class FreeCameraController : MonoBehaviour
         Vector3 thrust = new Vector3(moveX, moveY, moveZ) * thrustForce;
         rb.AddRelativeForce(thrust, ForceMode.Acceleration);
     }
+    public void DisableCamera()
+    {
+        this.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
 
     void OnDestroy()
     {
