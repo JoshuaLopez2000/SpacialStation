@@ -3,7 +3,17 @@ guid: d02e2bf1393c8e840a42c586e03ae17d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: portal_button_blue
+    second: {fileID: 2100000, guid: 5768db44c3a9c5d43abdf506d67d8526, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: portal_button_switch
+    second: {fileID: 2100000, guid: 6785b3ee48524af4a95bf78a387e08d1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
