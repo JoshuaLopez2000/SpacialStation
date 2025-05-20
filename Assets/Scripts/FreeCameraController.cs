@@ -34,8 +34,7 @@ public class FreeCameraController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); // opcional, para evitar voltear
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.parent.Rotate(Vector3.up * mouseX);
+        transform.rotation *= Quaternion.Euler(-mouseY, mouseX, 0f);
     }
 
     void FixedUpdate()
