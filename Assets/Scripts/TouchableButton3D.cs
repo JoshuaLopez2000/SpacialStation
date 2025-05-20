@@ -60,7 +60,7 @@ public class TouchableButton3D : MonoBehaviour
 
         bool victory = totalSelected >= 5;
 
-        if (sharedCameraController != null)
+        if (sharedCameraController != null && victory)
             sharedCameraController.DisableCamera();
 
         if (sharedPanelToActivate != null)
