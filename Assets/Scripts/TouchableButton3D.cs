@@ -16,6 +16,7 @@ public class TouchableButton3D : MonoBehaviour
 
     void Start()
     {
+        totalSelected = 0;
         if (targetRenderer == null)
             targetRenderer = GetComponent<Renderer>();
 

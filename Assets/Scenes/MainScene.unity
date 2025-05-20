@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "L\xF3pez Nava Joshua Ivan"
+  m_text: Lopez Nava Joshua Ivan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e54b8aebdc74b0e42af02cfef20d74a6, type: 2}
   m_sharedMaterial: {fileID: 6625099513958078066, guid: e54b8aebdc74b0e42af02cfef20d74a6, type: 2}
